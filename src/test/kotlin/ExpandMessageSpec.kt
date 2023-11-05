@@ -8,7 +8,7 @@ class ExpandMessageSpec {
     @Test
     fun `test vectors for expand_message_xmd(SHA-256)`() {
         val expand = ExpandMessage.Xmd(HashFunction.SHA256)
-        val tag = "QUUX-V01-CS02-with-expander".toTag()
+        val tag = DomainSeparationTag("QUUX-V01-CS02-with-expander")
         val message = ByteArray(0)
         val size = Size(0x20)
         val result = expand(message, tag, size)
