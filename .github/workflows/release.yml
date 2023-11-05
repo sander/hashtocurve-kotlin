@@ -1,0 +1,33 @@
+name: Release
+on:
+  push:
+    branches: ["main"]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    environment:
+      name: central
+      url: https://central.sonatype.com/artifact/nl.sanderdijkhuis/hashtocurve-kotlin # TODO different URL for SNAPSHOT versions
+    steps:
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # ratchet:actions/checkout@v3
+      - uses: actions/setup-java@0ab4596768b603586c0de567f2430c30f5b0d2b0 # ratchet:actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 8
+      - uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # ratchet:gradle/gradle-build-action@v2
+      - name: Import GPG key
+        run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
+      - name: Export GPG keyring
+        run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}" | gpg --batch --yes --keyring secring.gpg --export-secret-keys --passphrase-fd 0 --pinentry-mode loopback > ~/.gnupg/secring.gpg
+      - name: Configure Gradle
+        run: |
+          mkdir -p ~/.gradle
+          touch ~/.gradle/gradle.properties
+          echo "sonatypeUsername=${{ vars.OSSRH_USER }}" >> ~/.gradle/gradle.properties
+          echo "sonatypePassword=${{ secrets.OSSRH_PASSWORD }}" >> ~/.gradle/gradle.properties
+          echo "signing.keyId=${{ vars.OSSRH_GPG_KEY_ID }}" >> ~/.gradle/gradle.properties
+          echo "signing.password=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}" >> ~/.gradle/gradle.properties
+          echo "signing.secretKeyRingFile=$HOME/.gnupg/secring.gpg" >> ~/.gradle/gradle.properties
+      - run: ./gradlew publish
