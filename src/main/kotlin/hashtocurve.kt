@@ -27,10 +27,12 @@
  * IN THE SOFTWARE.
  */
 @file:Risk(
+    "9f9de194-aac6-4c12-80c3-97c8d6af0873",
     "Since this project has not been independently audited, attackers may find and exploit weaknesses before you do",
     treatment = "Assess the risks before using this for real, and help out to increase security or make risks explicit"
 )
 @file:Risk(
+    "f3034bd2-77fe-440c-93b9-06da0a125328",
     "More API surface is exposed than needed",
     treatment = "For now, encourage users to just rely on HashToCurve.P256(tag)(message) and ignore the rest"
 )
@@ -58,6 +60,7 @@ import kotlin.math.ceil
 class Point(val x: ByteArray, val y: ByteArray)
 
 @Risk(
+    "d45a7964-14cb-453d-8eba-0d0a1f3f0bfe",
     "Some functions are hard-coded for the P-256 suite, potentially introducing errors in other implementations",
     treatment = "Accept and pay extra attention when implementing other suites"
 )
@@ -411,4 +414,4 @@ internal annotation class DesignDecision(val summary: String, val rationale: Str
 
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FILE)
 @Repeatable
-internal annotation class Risk(val scenario: String, val treatment: String)
+internal annotation class Risk(val id: String, val scenario: String, val treatment: String)
