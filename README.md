@@ -21,15 +21,13 @@ Instead of `test`, use `jar` to create a JAR in `build/libs`.
 
 ## How to use in an application
 
-Add the JAR as a dependency to your project.
+The easiest is to copy-paste [`hashtocurve.kt`](src/main/kotlin/hashtocurve.kt) into your project and maintain your fork there. Check back regularly if this source project has relevant changes for you, and publish changes you consider useful for others.
 
-Then select a `Suite` and configure a `DomainSeparationTag` (see [Domain Separation Requirements](https://www.rfc-editor.org/rfc/rfc9380.html#name-domain-separation-requireme)). With the resulting function, you can hash any byte array to the related elliptic curve.
+Alternatively, add the JAR that you have built as a dependency to your project.
 
-## Design decisions
+Make the `implementation` dependencies from [`build.gradle.kts`](build.gradle.kts) available in your project.
 
-- Abstract over big integer implementations, enabling porting to [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html).
-- Use the Go [math/big](https://pkg.go.dev/math/big) style of handling big integers, enabling memory control in some implementations.
-    - Consequence: this may be counterintuitive to JVM users.
+After including the code and its dependencies in your project, select a `HashToCurve` suite and configure a domain separation tag (see [Domain Separation Requirements](https://www.rfc-editor.org/rfc/rfc9380.html#name-domain-separation-requireme)). With the resulting function, you can hash any byte array to the related elliptic curve. The result is encoded as a `Point(x: ByteArray, y: ByteArray)` with components that contain the big-endian encoding of affine curve point coordinates.
 
 ## Test vectors
 
