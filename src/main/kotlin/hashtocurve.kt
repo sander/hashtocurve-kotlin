@@ -2,7 +2,7 @@
  * Implementation of RFC 9380 algorithms for encoding or hashing an arbitrary
  * byte array to a point on an elliptic curve.
  *
- * http://sanderdijkhuis.nl/2023/hashtocurve-kotlin/
+ * https://sanderdijkhuis.nl/2023/hashtocurve-kotlin/
  *
  * MIT License
  *
