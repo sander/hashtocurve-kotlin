@@ -15,19 +15,15 @@ On Windows:
 
     gradlew test
 
-See [HashToCurveSpec](src/test/kotlin/HashToCurveSpec.kt) for example usage.
-
 Instead of `test`, use `jar` to create a JAR in `build/libs`.
 
 ## How to use in an application
 
-The easiest is to copy-paste [`hashtocurve.kt`](src/main/kotlin/hashtocurve.kt) into your project and maintain your fork there. Check back regularly if this source project has relevant changes for you, and publish changes you consider useful for others.
+Add the [`hashtocurve-kotlin` dependency](https://jitpack.io/#nl.sanderdijkhuis/hashtocurve-kotlin) to your project.
 
-Alternatively, add the JAR that you have built as a dependency to your project.
+Select a `HashToCurve` suite and configure a domain separation tag (see [Domain Separation Requirements](https://www.rfc-editor.org/rfc/rfc9380.html#name-domain-separation-requireme)). With the resulting function, you can hash any byte array to the related elliptic curve. The result is encoded as a `Point(x: ByteArray, y: ByteArray)` with components that contain the big-endian encoding of affine curve point coordinates.
 
-Make the `implementation` dependencies from [`build.gradle.kts`](build.gradle.kts) available in your project.
-
-After including the code and its dependencies in your project, select a `HashToCurve` suite and configure a domain separation tag (see [Domain Separation Requirements](https://www.rfc-editor.org/rfc/rfc9380.html#name-domain-separation-requireme)). With the resulting function, you can hash any byte array to the related elliptic curve. The result is encoded as a `Point(x: ByteArray, y: ByteArray)` with components that contain the big-endian encoding of affine curve point coordinates.
+See [HashToCurveSpec](src/test/kotlin/HashToCurveSpec.kt) for example usage.
 
 ## Test vectors
 
