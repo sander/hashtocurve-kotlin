@@ -20,5 +20,6 @@ jobs:
         with:
           distribution: zulu
           java-version: 8
+          cache: gradle
       - uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # ratchet:gradle/gradle-build-action@v2
       - run: ./gradlew check
