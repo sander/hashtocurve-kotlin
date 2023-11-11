@@ -1,5 +1,7 @@
 # Hashing to Elliptic Curves for Kotlin
 
+[![](https://jitpack.io/v/nl.sanderdijkhuis/hashtocurve-kotlin.svg)](https://jitpack.io/#nl.sanderdijkhuis/hashtocurve-kotlin)
+
 **Hashing to Elliptic Curves for Kotlin** implements [RFC 9380](https://www.rfc-editor.org/rfc/rfc9380.html) algorithms for encoding or hashing an arbitrary byte array to a point on an elliptic curve.
 
 > [!WARNING]
